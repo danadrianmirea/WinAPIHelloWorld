@@ -1,0 +1,3 @@
+D:/adi/src/winapiTestRect/build/CMakeFiles/ALL_BUILD.dir
+D:/adi/src/winapiTestRect/build/CMakeFiles/ZERO_CHECK.dir
+D:/adi/src/winapiTestRect/build/code/CMakeFiles/Project.dir

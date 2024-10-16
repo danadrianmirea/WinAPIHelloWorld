@@ -1,0 +1,10 @@
+^D:\ADI\SRC\WINAPITESTRECT\BUILD\CMAKEFILES\C32C16D4B98AEA0A50033B4C728B96C7\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/adi/src/winapiTestRect -BD:/adi/src/winapiTestRect/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/adi/src/winapiTestRect/build/Project.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
