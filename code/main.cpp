@@ -31,8 +31,25 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
+volatile LONG counter = 0; // Global counter to track timer interrupts
+// Timer interrupt handler
+VOID CALLBACK TimerProc(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime) {
+    // Increment the counter
+    InterlockedIncrement(&counter);
+    
+    // Print the counter value
+    std::cout << "Timer Interrupt: " << counter << std::endl;
+    std::cout.flush(); // Ensure output is flushed to the console
+}
+
 int32_t main()
 {
+    UINT_PTR timerId = SetTimer(NULL, 0, 1000, TimerProc);
+    if (timerId == 0) {
+        std::cerr << "Failed to create timer." << std::endl;
+        return 1;
+    }
+
     // Register the window class
     WNDCLASS wc = {};
     wc.lpfnWndProc = WindowProc;
@@ -68,6 +85,10 @@ int32_t main()
         TranslateMessage(&msg);
         DispatchMessage(&msg);
     }
+
+    // Clean up the timer
+    KillTimer(NULL, timerId);
+    std::cout << "Timer stopped." << std::endl;
 
     return 0;
 }
